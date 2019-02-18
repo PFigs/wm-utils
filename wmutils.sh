@@ -21,9 +21,23 @@ DIR=`dirname "${THIS}"`
 #flash_menu $DIR_IMAGES
 #erase_menu
 
-#enter main menu
-SELECTION=$(main_menu)
-echo $SELECTION
+SELECTION=$(parse_args "$@")
+
+if [ $? -eq 1 ];then
+    exit $?
+fi
+
+if [ $SELECTION == "0" ]; then
+    #enter main menu
+    SELECTION=$(main_menu)
+fi
+
+if [ $? -eq 1 ];then
+    echo EXIT
+    exit $?
+fi
+
+#echo $SELECTION
 
 # do something
 run_action $SELECTION
