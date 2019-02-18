@@ -7,7 +7,9 @@
 # */
 
 
-
+################################################################################
+# Initialize paths etc
+################################################################################
 # Full path of the current script
 THIS=`readlink -f "${BASH_SOURCE[0]}" 2>/dev/null||echo $0`
 # The directory where current script resides
@@ -15,15 +17,17 @@ DIR=`dirname "${THIS}"`
  
 # 'Dot' means 'source', i.e. 'include':
 . "$DIR/config/directories.inc"
-#all functions
+#import all functions
 . "$DIR_COMMON/scripts.inc"
 
-#flash_menu $DIR_IMAGES
-#erase_menu
 
+###############################################################################
+
+#check command line arguments
 SELECTION=$(parse_args "$@")
 
 if [ $? -eq 1 ];then
+    #exit on error
     exit $?
 fi
 
@@ -33,13 +37,12 @@ if [ $SELECTION == "0" ]; then
 fi
 
 if [ $? -eq 1 ];then
-    echo EXIT
+    #exit on cancel
     exit $?
 fi
 
-#echo $SELECTION
-
-# do something
+# do something $SELECTION has number of actions
 run_action $SELECTION
 
 
+exit 0
