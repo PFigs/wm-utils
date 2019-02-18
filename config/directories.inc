@@ -13,6 +13,10 @@ SCRIPT_BUILD_MENU=$DIR_COMMON/buildmenu.sh
 SCRIPT_DEVICE_MENU=$DIR_COMMON/devmenu.sh
 SCRIPT_FLASH_MENU=$DIR_COMMON/flashmenu.sh
 SCRIPT_ERASE_MENU=$DIR_COMMON/erasemenu.sh
+SCRIPT_MAIN_MENU=$DIR_COMMON/mainmenu.sh
+
+SCRIPT_RUN_ACTION=$DIR_COMMON/run_action.sh
+
 ###############################################################################
 #JLINK
 FLASH_JLINK=$DIR_CONFIG/flash.jlink

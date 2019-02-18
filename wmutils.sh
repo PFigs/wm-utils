@@ -18,12 +18,14 @@ DIR=`dirname "${THIS}"`
 #all functions
 . "$DIR_COMMON/scripts.inc"
 
+#flash_menu $DIR_IMAGES
+#erase_menu
 
+#enter main menu
+SELECTION=$(main_menu)
+echo $SELECTION
 
-flash_menu $DIR_IMAGES
-
-erase_menu
-
-
+# do something
+run_action $SELECTION
 
 

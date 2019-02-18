@@ -6,6 +6,14 @@
 # *
 # */
 
+if [[ "$BASH_SOURCE" == "$0" ]]
+then
+    echo "Please run wmutils.sh"
+    exit
+fi
+
+
+
 function get_device_ids(){
 
     SEGGER_ID=1366:1015

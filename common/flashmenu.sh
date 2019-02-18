@@ -6,6 +6,14 @@
 # *
 # */
 
+if [[ "$BASH_SOURCE" == "$0" ]]
+then
+    echo "Please run wmutils.sh"
+    exit
+fi
+
+
+
 function flash_menu(){
 
 EFR=EFR32MG12P332F1024GL125
