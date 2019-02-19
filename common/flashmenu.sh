@@ -13,7 +13,6 @@ then
 fi
 
 
-
 function flash_menu(){
 
 EFR=EFR32MG12P332F1024GL125
@@ -22,14 +21,25 @@ FW_DIR=$1
 
     cd $FW_DIR
 
-    IMAGES=$(ls *.hex)
+    #IMAGES=$(ls *.hex)
+    IMAGES=$(find . -name '*.hex' | cut -c2-)
+
+    if [ -z "$IMAGES" ]; then
+
+        ERR="No images found in $FW_DIR!"
+        ui_errorbox "$ERR"
+        echo $ERR
+        exit 1
+    fi     
     
     cd $DIR
     
     IMAGES_ARR=($IMAGES)
     IMAGES_LEN=${#IMAGES_ARR[@]}
     if (( ${#IMAGES_LEN} == 0 )); then
-        echo "No images found!"
+        ERR="No images found!"
+        ui_errorbox "$ERR"
+        echo $ERR
         exit 1
     fi
 
@@ -42,21 +52,34 @@ FW_DIR=$1
     done
 
     IMAGE=$(whiptail --notags --title "Flash" --radiolist "Select image" \
-        15 50 $IMAGES_LEN \
+        15 80 $IMAGES_LEN \
         $rl_imgs \
         3>&1 1>&2 2>&3)
     stat=$?
     if (( $stat != 0 )); then
-        echo "Cancelled!"
+        ERR="Cancelled"
+        ui_errorbox "$ERR"
+        echo $ERR
         exit 1
     fi
 #else
 #    IMAGE=$1
 #fi
 
+    if [ -z "$IMAGE" ]; then
+
+        ERR="No image selected!"
+        ui_errorbox "$ERR"
+        echo $ERR
+        exit 1
+    fi 
+
 DEVICES=$(get_device_ids "(FLASH)")
 if ((${#DEVICES} == 0)); then
-    echo "No devices"
+
+    ERR="No devices connected."
+    ui_errorbox "$ERR"
+    echo $ERR
     exit 1
 fi
 

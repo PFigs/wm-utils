@@ -15,7 +15,9 @@ SCRIPT_PARSE_ARGS=$DIR_COMMON/parse.sh
 SCRIPT_MAIN_MENU=$DIR_COMMON/mainmenu.sh
 
 SCRIPT_RUN_ACTION=$DIR_COMMON/run_action.sh
-
+###############################################################################
+#common scripts
+UI_SCRIPTS=$DIR_COMMON/whip_ui.sh
 ###############################################################################
 #JLINK
 FLASH_JLINK=$DIR_CONFIG/flash.jlink

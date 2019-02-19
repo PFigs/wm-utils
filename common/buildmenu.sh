@@ -47,7 +47,11 @@ function buildmenu()
         exit 1
     fi
 
-    echo ${PROJECTS//\"/}
+    TARGETS=${PROJECTS//\"/}
+
+    build_app $PROJECTS
+
+    #build_app $"${PROJECTS[@]}"
 
     exit 0
 }

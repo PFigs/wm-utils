@@ -19,7 +19,9 @@ EFR=EFR32MG12P332F1024GL125
 
 DEVICES=$(get_device_ids "(ERASE)")
 if ((${#DEVICES} == 0)); then
-    echo "No devices"
+    ERR="No devices connected."
+    ui_errorbox "$ERR"
+    echo $ERR
     exit 1
 fi
 

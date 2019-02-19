@@ -60,3 +60,35 @@ else
 fi
 
 }
+
+# input: list of target apps as an array 
+function build_app()
+{
+   CLEAN=" clean"
+
+   MAKE_CMD="make -f makefile app_name="
+   CMD1="foo" 
+   CMD2="bar" 
+ 
+   arr=("$@")
+   
+   olddir=$PWD
+   cd $DIR_SDK
+   echo "Building at $PWD"
+
+   for i in "${arr[@]}";
+      do
+          TARGET=${i//\"/}
+          CMD1=$MAKE_CMD$TARGET$CLEAN 
+          CMD2=$MAKE_CMD$TARGET 
+          #echo $CMD1
+          #exec $CMD1
+
+          echo $CMD2
+          exec $CMD2  
+         
+      done
+
+   cd $olddir   
+
+}
