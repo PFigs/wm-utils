@@ -1,6 +1,4 @@
-#!/bin/bash
-
-#!/bin/bash
+#!/usr/bin/env bash
 
 #/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
 # *
