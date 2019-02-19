@@ -21,6 +21,7 @@ fi
 function build()
 {
     echo "BUILD"
+    buildmenu
 }
 
 function log()
