@@ -22,27 +22,34 @@ source "$DIR_COMMON/scripts.env"
 
 
 ###############################################################################
+function main()
+{
+    #check command line arguments
+    SELECTION=$(parse_args "$@")
 
-#check command line arguments
-SELECTION=$(parse_args "$@")
+    if [ $? -eq 1 ];then
+        #exit on error
+        exit $?
+    fi
 
-if [ $? -eq 1 ];then
-    #exit on error
-    exit $?
-fi
+    if [ $SELECTION == "0" ]; then
+        #enter main menu
+        SELECTION=$(main_menu)
+    fi
 
-if [ $SELECTION == "0" ]; then
-    #enter main menu
-    SELECTION=$(main_menu)
-fi
+    if [ $? -eq 1 ];then
+        #exit on cancel
+        exit $?
+    fi
 
-if [ $? -eq 1 ];then
-    #exit on cancel
-    exit $?
-fi
+    # do something $SELECTION has number of actions
+    run_action $SELECTION
 
-# do something $SELECTION has number of actions
-run_action $SELECTION
+    exit 0
+
+}
+
+main "$@"
 
 
-exit 0
+exit $?
