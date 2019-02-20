@@ -8,13 +8,13 @@ fi
 
 # 'Dot' means 'source', i.e. 'include':
  #common helpers
- . "$UI_SCRIPTS"
+ source "$UI_SCRIPTS"
  #menu implementations
- . "$SCRIPT_BUILD_MENU"
- . "$SCRIPT_DEVICE_MENU"
- . "$SCRIPT_FLASH_MENU"
- . "$SCRIPT_ERASE_MENU"
- . "$SCRIPT_MAIN_MENU"
- . "$SCRIPT_PARSE_ARGS"
+ source "$SCRIPT_BUILD_MENU"
+ source "$SCRIPT_DEVICE_MENU"
+ source "$SCRIPT_FLASH_MENU"
+ source "$SCRIPT_ERASE_MENU"
+ source "$SCRIPT_MAIN_MENU"
+ source "$SCRIPT_PARSE_ARGS"
  #actions
- . "$SCRIPT_RUN_ACTION"
+ source "$SCRIPT_RUN_ACTION"

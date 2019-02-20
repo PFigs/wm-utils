@@ -16,9 +16,9 @@ THIS=`readlink -f "${BASH_SOURCE[0]}" 2>/dev/null||echo $0`
 DIR=`dirname "${THIS}"`
  
 # 'Dot' means 'source', i.e. 'include':
-. "$DIR/config/directories.inc"
+source "$DIR/config/directories.inc"
 #import all functions
-. "$DIR_COMMON/scripts.inc"
+source "$DIR_COMMON/scripts.inc"
 
 
 ###############################################################################
