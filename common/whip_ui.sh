@@ -6,6 +6,7 @@
 # *
 # */
 
+
 if [[ "$BASH_SOURCE" == "$0" ]]
 then
     echo "Please run wmutils.sh"

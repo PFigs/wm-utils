@@ -18,7 +18,7 @@ DIR=`dirname "${THIS}"`
 # 'Dot' means 'source', i.e. 'include':
 source "$DIR/config/directories.inc"
 #import all functions
-source "$DIR_COMMON/scripts.inc"
+source "$DIR_COMMON/scripts.env"
 
 
 ###############################################################################
