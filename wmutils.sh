@@ -11,14 +11,14 @@
 # Initialize paths etc
 ################################################################################
 # Full path of the current script
-THIS=`readlink -f "${BASH_SOURCE[0]}" 2>/dev/null||echo $0`
+THIS=$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null||echo $0)
 # The directory where current script resides
-DIR=`dirname "${THIS}"`
+DIR=$(dirname "${THIS}")
  
 # 'Dot' means 'source', i.e. 'include':
-source "$DIR/config/directories.inc"
+source "${DIR}/config/directories.inc"
 #import all functions
-source "$DIR_COMMON/scripts.env"
+source "${DIR_COMMON}/scripts.env"
 
 
 ###############################################################################
@@ -32,7 +32,7 @@ function main()
         exit $?
     fi
 
-    if [ $SELECTION == "0" ]; then
+    if [ ${SELECTION} == "0" ]; then
         #enter main menu
         SELECTION=$(main_menu)
     fi
@@ -43,7 +43,7 @@ function main()
     fi
 
     # do something $SELECTION has number of actions
-    run_action $SELECTION
+    run_action ${SELECTION}
 
     exit 0
 

@@ -16,16 +16,16 @@ fi
 
 function get_device_ids(){
 
-    SEGGER_ID=1366:1015
+    segger_id=1366:1015
 
-    USB_IDS=$(lsusb -v -d $SEGGER_ID | grep iSerial | awk '{print $3}')
-    USB_IDS_ARR=($USB_IDS)
-    USB_IDS_LEN=${#USB_IDS_ARR[@]}
-    if (( ${#USB_IDS} == 0 )); then
+    usb_ids=$(lsusb -v -d ${segger_id} | grep iSerial | awk '{print $3}')
+    usb_ids_arr=($usb_ids)
+    usb_ids_len=${#usb_ids_arr[@]}
+    if (( ${#usb_ids} == 0 )); then
         exit 1
     fi
 
-    for id in $USB_IDS; do
+    for id in $usb_ids; do
         if ((${#first} == 0)); then
             cl_ids="$id $id 1"
             first=false
@@ -34,16 +34,19 @@ function get_device_ids(){
         fi
     done
 
+    #todo: move to whip_ui.sh
+    devices=$(whiptail --notags --title "Segger JLink USB" --checklist "Choose devices $1" \
+        15 30 $usb_ids_len \
+        $cl_ids \
+        3>&1 1>&2 2>&3)
 
-DEVICES=$(whiptail --notags --title "Segger JLink USB" --checklist "Choose devices $1" \
-    15 30 $USB_IDS_LEN \
-    $cl_ids \
-    3>&1 1>&2 2>&3)
-stat=$?
-if (( $stat != 0 )); then
-    exit 1
-fi
+    stat=$?
+    if (( $stat != 0 )); then
+        exit 1
+    fi
 
-echo ${DEVICES//\"/}
+    echo ${devices//\"/}
+
+    exit 0
 
 }

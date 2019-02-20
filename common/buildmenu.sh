@@ -15,20 +15,20 @@ fi
 
 function get_sdk_projects()
 {
-    echo $(ls $DIR_SDK/source) 
+    echo $(ls ${DIR_SDK}/source) 
 }
 
 function buildmenu()
 {
-    PROJECTS=$(get_sdk_projects)
+    projects=$(get_sdk_projects)
 
-    PRJ_IDS_ARR=($PROJECTS)
-    PRJ_IDS_LEN=${#PRJ_IDS_ARR[@]}
-    if (( ${#PROJECTS} == 0 )); then
+    prj_ids_arr=($projects)
+    prj_ids_len=${#prj_ids_arr[@]}
+    if (( ${#projects} == 0 )); then
         exit 1
     fi
 
-    for id in $PROJECTS; do
+    for id in $projects; do
         if ((${#first} == 0)); then
             cl_ids="$id $id 1"
             first=false
@@ -37,8 +37,8 @@ function buildmenu()
         fi
     done
 
-    PROJECTS=$(whiptail --notags --title "Application Builder" --checklist "Choose projects $1" \
-    15 30 $PRJ_IDS_LEN \
+    projects=$(whiptail --notags --title "Application Builder" --checklist "Choose projects $1" \
+    15 30 $prj_ids_len \
     $cl_ids \
     3>&1 1>&2 2>&3)
 
@@ -47,11 +47,9 @@ function buildmenu()
         exit 1
     fi
 
-    TARGETS=${PROJECTS//\"/}
+    targets=${projects//\"/}
 
-    build_app $PROJECTS
-
-    #build_app $"${PROJECTS[@]}"
+    build_app ${projects}
 
     exit 0
 }

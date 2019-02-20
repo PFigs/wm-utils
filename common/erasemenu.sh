@@ -15,13 +15,16 @@ fi
 
 function erase_menu(){
 
+tmp_jlink_file="~/.wmerase.jlink"
+eval tmp_jlink_file=${tmp_jlink_file}
+
 EFR=EFR32MG12P332F1024GL125
 
-DEVICES=$(get_device_ids "(ERASE)")
-if ((${#DEVICES} == 0)); then
-    ERR="No devices connected."
-    ui_errorbox "$ERR"
-    echo $ERR
+devices=$(get_device_ids "(ERASE)")
+if ((${#devices} == 0)); then
+    err="No devices connected."
+    ui_errorbox "$err"
+    echo $err
     exit 1
 fi
 
@@ -31,14 +34,14 @@ if ((${#JLINK_DEVICE} == 0)); then
 fi
 fw_file=
 cmd="gsub(\"DEVICE\", \"$JLINK_DEVICE\");"
-awk "{$cmd; print}" $ERASE_JLINK > /tmp/erase.jlink
+awk "{$cmd; print}" $ERASE_JLINK > ${tmp_jlink_file}
 
-for DEV in $DEVICES; do
+for dev in $devices; do
     JLINK_OPT="-SelectEmuBySN "
-    JLINK_OPT+=${DEV//\"/}
-    JLinkExe $JLINK_OPT -CommanderScript /tmp/erase.jlink
+    JLINK_OPT+=${dev//\"/}
+    JLinkExe $JLINK_OPT -CommanderScript ${tmp_jlink_file}
 done
 
-rm /tmp/erase.jlink
+rm ${tmp_jlink_file}
 
 }
