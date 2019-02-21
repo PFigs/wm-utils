@@ -23,7 +23,7 @@ OPTION=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your optio
  
 exitstatus=$?
 if [ $exitstatus = 0 ]; then
-    echo $OPTION  
+    echo ${OPTION}  
     exit 0  
 else
     echo "0"

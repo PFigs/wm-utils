@@ -13,12 +13,14 @@ then
 fi
 
 
-function erase_menu(){
+function log_menu()
+{
 
-tmp_jlink_file="~/.wmerase.jlink"
-eval tmp_jlink_file=${tmp_jlink_file}
+#tmp_jlink_file="~/.wmerase.jlink"
+#eval tmp_jlink_file=${tmp_jlink_file}
 
-devices=$(get_device_ids "(ERASE)")
+devices=$(get_device_ids "(RTT LOGGER)")
+
 if ((${#devices} == 0)); then
     err="No devices connected."
     ui_errorbox "$err"
@@ -26,9 +28,13 @@ if ((${#devices} == 0)); then
     exit 1
 fi
 
+
+echo "RTT PORT:$(find_free_port)"
+exit 1
+
 # Set device only if it is not already set via env
 if ((${#JLINK_DEVICE} == 0)); then
-    JLINK_DEVICE=$EFR
+    JLINK_DEVICE=${EFR}
 fi
 fw_file=
 cmd="gsub(\"DEVICE\", \"$JLINK_DEVICE\");"
@@ -40,6 +46,6 @@ for dev in $devices; do
     JLinkExe $JLINK_OPT -CommanderScript ${tmp_jlink_file}
 done
 
-rm ${tmp_jlink_file}
+#rm ${tmp_jlink_file}
 
 }

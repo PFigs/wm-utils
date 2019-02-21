@@ -17,9 +17,7 @@ function flash_menu(){
 
     tmp_jlink_file="~/.wmflash.jlink"
     eval tmp_jlink_file=${tmp_jlink_file}
-
-    EFR=EFR32MG12P332F1024GL125
-    
+  
     fw_dir=$1
     old_dir=$PWD
     cd $fw_dir

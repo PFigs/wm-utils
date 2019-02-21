@@ -14,6 +14,20 @@ then
 fi
 
 
+#find free tcp port
+function find_free_port()
+{
+    lower_port=19000 
+    upper_port=20000
+    
+    while :; do
+        for (( port = lower_port ; port <= upper_port ; port++ )); do
+            nc -l -p "$port" 2>/dev/null && break 2
+        done
+    done
+
+    echo $port
+}
 
 
 function build()
@@ -25,6 +39,7 @@ function build()
 function log()
 {
     echo "LOG"
+    log_menu
 }
 
 function flash()
