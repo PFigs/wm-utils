@@ -17,18 +17,17 @@ fi
 #find free tcp port
 function find_free_port()
 {
-    lower_port=19000 
-    upper_port=20000
-    
-    while :; do
-        for (( port = lower_port ; port <= upper_port ; port++ )); do
-            nc -l -p "$port" 2>/dev/null && break 2
-        done
-    done
 
+    lowerport=19200
+    upperport=19999
+
+    while :
+    do
+        port=$(shuf -i $lowerport-$upperport -n 1)
+        ss -lpn | grep -q ":$port " || break
+    done
     echo $port
 }
-
 
 function build()
 {

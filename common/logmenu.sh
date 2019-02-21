@@ -30,22 +30,17 @@ fi
 
 
 echo "RTT PORT:$(find_free_port)"
-exit 1
 
 # Set device only if it is not already set via env
 if ((${#JLINK_DEVICE} == 0)); then
     JLINK_DEVICE=${EFR}
 fi
-fw_file=
-cmd="gsub(\"DEVICE\", \"$JLINK_DEVICE\");"
-awk "{$cmd; print}" $ERASE_JLINK > ${tmp_jlink_file}
 
 for dev in $devices; do
-    JLINK_OPT="-SelectEmuBySN "
-    JLINK_OPT+=${dev//\"/}
-    JLinkExe $JLINK_OPT -CommanderScript ${tmp_jlink_file}
-done
 
-#rm ${tmp_jlink_file}
+    ##START SCREEN SESSIONS
+    echo $dev 
+
+done
 
 }
