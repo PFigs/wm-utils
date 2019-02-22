@@ -21,6 +21,7 @@ SCRIPT_RUN_ACTION=${WM_DIR_COMMON}/run_action.sh
 ###############################################################################
 #common scripts
 UI_SCRIPTS=${WM_DIR_COMMON}/whip_ui.sh
+RTT_UTIL=${WM_DIR_COMMON}/rtt_util.sh
 ###############################################################################
 #JLINK
 FLASH_JLINK=${WM_DIR_CONFIG}/flash.jlink

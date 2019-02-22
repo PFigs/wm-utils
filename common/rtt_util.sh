@@ -59,6 +59,27 @@ function rtt_start_session()
     chmod a+rxw $WM_DIR_RTT_SESSIONS/$rtt_session
 }
 
+#finds session pid from ps ands kills it
+#$1 session id
+function rtt_kill_session()
+{
+     pid=$(ps -ef | grep SCREEN | grep $1 | cut -d ' ' -f3) 
+
+     echo "Kill Session: $1 Pid: $pid"
+     
+     cmd="kill -9 $pid"
+
+     echo ${cmd}
+
+     $(${cmd})
+}
+
+#kills session using session file
+#$1 session id
+function rtt_delete_session()
+{
+     exec $WM_DIR_RTT_SESSIONS/$1.sh
+}
 
 function rtt_find_sessions()
 {

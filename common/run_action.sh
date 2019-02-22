@@ -22,7 +22,7 @@ function build()
 function log()
 {
     ui_debug "LOG"
-    log_menu
+    log_main
 }
 
 function flash()
