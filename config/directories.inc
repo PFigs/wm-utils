@@ -30,3 +30,6 @@ ERASE_JLINK=${WM_DIR_CONFIG}/erase.jlink
 #DIR_IMAGES=${WM_ROOT_DIR}/images
 #Override with user config
 source "$WM_DIR_CONFIG/user.conf"
+###############################################################################
+#temp files
+WM_DIR_RTT_SESSIONS=${WM_ROOT_DIR}/.rttsessions

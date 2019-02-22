@@ -15,32 +15,17 @@ fi
 
 function log_menu()
 {
+    devices=$(get_device_ids "(LOGGER)")
 
-#tmp_jlink_file="~/.wmerase.jlink"
-#eval tmp_jlink_file=${tmp_jlink_file}
+    if ((${#devices} == 0)); then
+        err="No devices connected."
+        ui_errorbox "$err"
+        echo $err
+        exit 1
+    fi
 
-devices=$(get_device_ids "(RTT LOGGER)")
-
-if ((${#devices} == 0)); then
-    err="No devices connected."
-    ui_errorbox "$err"
-    echo $err
-    exit 1
-fi
-
-
-echo "RTT PORT:$(find_free_port)"
-
-# Set device only if it is not already set via env
-if ((${#JLINK_DEVICE} == 0)); then
-    JLINK_DEVICE=${EFR}
-fi
-
-for dev in $devices; do
-
-    ##START SCREEN SESSIONS
-    echo $dev 
-
-done
-
+    for dev in $devices; do
+        port=$(find_free_port)
+        start_rtt_screen $dev $port
+    done
 }
