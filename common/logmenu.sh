@@ -26,6 +26,6 @@ function log_menu()
 
     for dev in $devices; do
         port=$(find_free_port)
-        start_rtt_screen $dev $port
+        rtt_start_session $dev $port
     done
 }
