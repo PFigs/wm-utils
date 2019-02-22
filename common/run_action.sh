@@ -31,73 +31,81 @@ function find_free_port()
 
 function build()
 {
-    echo "BUILD"
+    ui_debug "BUILD"
     buildmenu
 }
 
 function log()
 {
-    echo "LOG"
+    ui_debug "LOG"
     log_menu
 }
 
 function flash()
 {
-    echo "FLASH"
-    flash_menu $DIR_IMAGES
+    ui_debug "FLASH"
+    if [ -z "${WM_DIR_IMAGES}" ]; then
+        ui_errorbox "WM_DIR_IMAGES not defined"
+        exit 1
+    fi
+
+    flash_menu $WM_DIR_IMAGES
 }
 
 function erase()
 {
-    echo "ERASE"
+    ui_debug "ERASE"
     erase_menu
 }
 
 # $1 :  input number of action
-function run_action() {
+function run_action()
+{
 
-OPTION=$1
+option=$1
 
-if [ $OPTION -eq "1" ]; then
-    build
-elif [ $OPTION -eq "2" ]; then
-    log
-elif [ $OPTION -eq "3" ]; then
-    flash
-elif [ $OPTION -eq "4" ]; then
-    erase
-else
-    echo "invalid"
-    exit 1
-fi
+    if [ $option -eq "1" ]; then
+        build
+    elif [ $option -eq "2" ]; then
+        log
+    elif [ $option -eq "3" ]; then
+        flash
+    elif [ $option -eq "4" ]; then
+        erase
+    else
+        ui_errorbox "invalid action"
+        exit 1
+    fi
 
 }
 
 # input: list of target apps as an array 
 function build_app()
 {
-   CLEAN=" clean"
+   clean=" clean"
 
-   MAKE_CMD="make -f makefile app_name="
-   CMD1="foo" 
-   CMD2="bar" 
+   make_cmd="make -f makefile app_name="
+   cmd1="foo" 
+   cmd2="bar" 
  
    arr=("$@")
    
    olddir=$PWD
-   cd $DIR_SDK
-   echo "Building at $PWD"
+
+   cd $WM_DIR_SDK
+
+   ui_debug "Building at $PWD"
 
    for i in "${arr[@]}";
       do
-          TARGET=${i//\"/}
-          CMD1=$MAKE_CMD$TARGET$CLEAN 
-          CMD2=$MAKE_CMD$TARGET 
-          #echo $CMD1
-          #exec $CMD1
+          target=${i//\"/}
+          cmd1=$make_cmd$target$clean 
+          cmd2=$make_cmd$target 
+          #echo $cmd1
+          #exec $cmd1
 
-          echo $CMD2
-          exec $CMD2  
+          echo $cmd2
+          exec $cmd2  
          
       done
 

@@ -13,21 +13,20 @@ then
 fi
 
 
-function main_menu(){
-
-OPTION=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your option" 15 60 4 \
-"1" "Build Applications" \
-"2" "RTT Logger" \
-"3" "Program Firmware" \
-"4" "Erase Firmware"  3>&1 1>&2 2>&3)
- 
-exitstatus=$?
-if [ $exitstatus = 0 ]; then
-    echo ${OPTION}  
-    exit 0  
-else
-    echo "0"
-    exit 1
-fi
+function main_menu()
+{
+    option=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your option" 15 60 4 \
+    "1" "Build Applications" \
+    "2" "RTT Logger" \
+    "3" "Program Firmware" \
+    "4" "Erase Firmware"  3>&1 1>&2 2>&3)
     
+    exitstatus=$?
+    if [ $exitstatus = 0 ]; then
+        echo ${option}  
+        exit 0  
+    else
+        echo "0"
+        exit 1
+    fi
 }

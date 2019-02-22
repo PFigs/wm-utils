@@ -15,12 +15,23 @@ fi
 
 function get_sdk_projects()
 {
-    echo $(ls ${DIR_SDK}/source) 
+    projects=$(ls ${WM_DIR_SDK}/source) 
+
+    if [ $? -ne 0 ]; then
+        exit 1
+    fi
+
+    echo $projects
 }
 
 function buildmenu()
 {
     projects=$(get_sdk_projects)
+
+    if [ -z "${projects}" ]; then 
+        ui_errorbox "SDK path $WM_DIR_SDK not accessible"
+        exit 1
+    fi
 
     prj_ids_arr=($projects)
     prj_ids_len=${#prj_ids_arr[@]}
