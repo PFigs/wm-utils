@@ -13,7 +13,7 @@ then
 fi
 
 
-function get_sdk_projects()
+function build_get_sdk_projects()
 {
     projects=$(ls ${WM_DIR_SDK}/source) 
 
@@ -24,9 +24,9 @@ function get_sdk_projects()
     echo $projects
 }
 
-function buildmenu()
+function build_menu()
 {
-    projects=$(get_sdk_projects)
+    projects=$(build_get_sdk_projects)
 
     if [ -z "${projects}" ]; then 
         ui_errorbox "SDK path $WM_DIR_SDK not accessible"
@@ -48,10 +48,12 @@ function buildmenu()
         fi
     done
 
+    #todo: move top whip_ui.sh
     projects=$(whiptail --notags --title "Application Builder" --checklist "Choose projects $1" \
     15 30 $prj_ids_len \
     $cl_ids \
     3>&1 1>&2 2>&3)
+
 
     stat=$?
     if (( $stat != 0 )); then
@@ -60,7 +62,7 @@ function buildmenu()
 
     targets=${projects//\"/}
 
-    build_app ${projects}
+    action_build_app ${projects}
 
     exit 0
 }

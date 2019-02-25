@@ -14,7 +14,7 @@ fi
 
 
 
-function get_device_ids(){
+function device_get_ids(){
 
     segger_id=1366:1015
 

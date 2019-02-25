@@ -13,12 +13,12 @@ then
 fi
 
 
-function erase_menu(){
+function jlink_erase_menu(){
 
 tmp_jlink_file="~/.wmerase.jlink"
 eval tmp_jlink_file=${tmp_jlink_file}
 
-devices=$(get_device_ids "(ERASE)")
+devices=$(device_get_ids "(ERASE)")
 if ((${#devices} == 0)); then
     err="No devices connected."
     ui_errorbox "$err"

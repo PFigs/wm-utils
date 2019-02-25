@@ -72,7 +72,7 @@ function log_kill_session_menu()
 
 function log_device_menu()
 {
-    devices=$(get_device_ids "(LOGGER)")
+    devices=$(device_get_ids "(LOGGER)")
 
     if ((${#devices} == 0)); then
         err="No devices connected."
@@ -87,7 +87,7 @@ function log_device_menu()
     done
 }
 
-function log_main()
+function log_main_menu()
 {
       if [ "$@"=="0" ]; then
           option=$(log_menu)

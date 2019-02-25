@@ -13,16 +13,19 @@ then
 fi
 
 
-function flash_menu(){
+function jlink_flash_menu(){
 
     tmp_jlink_file="~/.wmflash.jlink"
     eval tmp_jlink_file=${tmp_jlink_file}
 
     fw_dir=$1
     old_dir=$PWD
+
     cd $fw_dir
 
     images=$(find . -name '*.hex' | cut -c2- | grep final)
+
+    cd ${old_dir}
 
     if [ -z "$images" ]; then
 
@@ -31,8 +34,6 @@ function flash_menu(){
         echo $err
         exit 1
     fi
-
-    cd ${old_dir}
 
     images_arr=($images)
     images_len=${#images_arr[@]}
@@ -73,7 +74,7 @@ function flash_menu(){
         exit 1
     fi
 
-    devices=$(get_device_ids "(FLASH)")
+    devices=$(device_get_ids "(FLASH)")
     if ((${#devices} == 0)); then
 
         err="No devices connected."

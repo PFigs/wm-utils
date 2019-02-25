@@ -13,19 +13,19 @@ then
     exit
 fi
 
-function build()
+function action_build()
 {
     ui_debug "BUILD"
-    buildmenu
+    build_menu
 }
 
-function log()
+function action_logger()
 {
     ui_debug "LOG"
-    log_main
+    log_main_menu
 }
 
-function flash()
+function action_flash()
 {
     ui_debug "FLASH"
     if [ -z "${WM_DIR_IMAGES}" ]; then
@@ -33,13 +33,13 @@ function flash()
         exit 1
     fi
 
-    flash_menu $WM_DIR_IMAGES
+    jlink_flash_menu $WM_DIR_IMAGES
 }
 
-function erase()
+function action_erase()
 {
     ui_debug "ERASE"
-    erase_menu
+    jlink_erase_menu
 }
 
 # $1 :  input number of action
@@ -49,13 +49,13 @@ function run_action()
 option=$1
 
     if [ $option -eq "1" ]; then
-        build
+        action_build
     elif [ $option -eq "2" ]; then
-        log
+        action_logger
     elif [ $option -eq "3" ]; then
-        flash
+        action_flash
     elif [ $option -eq "4" ]; then
-        erase
+        action_erase
     else
         ui_errorbox "invalid action"
         exit 1
@@ -64,7 +64,7 @@ option=$1
 }
 
 # input: list of target apps as an array
-function build_app()
+function action_build_app()
 {
    clean=" clean"
 
@@ -85,8 +85,6 @@ function build_app()
           target=${i//\"/}
           cmd1=$make_cmd$target$clean
           cmd2=$make_cmd$target
-          #echo $cmd1
-          #exec $cmd1
 
           echo $cmd2
           exec $cmd2
