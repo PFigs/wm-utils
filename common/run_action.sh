@@ -63,17 +63,17 @@ option=$1
 
 }
 
-# input: list of target apps as an array 
+# input: list of target apps as an array
 function build_app()
 {
    clean=" clean"
 
    make_cmd="make -f makefile app_name="
-   cmd1="foo" 
-   cmd2="bar" 
- 
+   cmd1="foo"
+   cmd2="bar"
+
    arr=("$@")
-   
+
    olddir=$PWD
 
    cd $WM_DIR_SDK
@@ -83,17 +83,17 @@ function build_app()
    for i in "${arr[@]}";
       do
           target=${i//\"/}
-          cmd1=$make_cmd$target$clean 
-          cmd2=$make_cmd$target 
+          cmd1=$make_cmd$target$clean
+          cmd2=$make_cmd$target
           #echo $cmd1
           #exec $cmd1
 
           echo $cmd2
-          exec $cmd2  
-         
+          exec $cmd2
+
       done
 
-   cd $olddir   
+   cd $olddir
 
 }
 

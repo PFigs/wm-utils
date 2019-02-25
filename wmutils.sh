@@ -6,22 +6,21 @@
 # *
 # */
 
+## _defaults
+## sources main functions and stores information regarding the location of
+## the script execution.
+function _defaults
+{
+    HOST_ARCHITECTURE=$(uname -m)
+    WM_ROOT_DIR=$(dirname "${this}")
 
-################################################################################
-# Initialize paths etc
-################################################################################
-# Full path of the current script
-this=$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null||echo $0)
-# The directory where current script resides
-WM_ROOT_DIR=$(dirname "${this}")
- 
-# 'Dot' means 'source', i.e. 'include':
-source "${WM_ROOT_DIR}/config/directories.inc"
-#import all functions
-source "${WM_DIR_COMMON}/scripts.env"
+    this=$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null||echo $0)
+
+    source "${WM_ROOT_DIR}/config/directories.env"
+    source "${WM_DIR_COMMON}/scripts.env"
+}
 
 
-###############################################################################
 function main()
 {
     #check command line arguments
@@ -44,11 +43,10 @@ function main()
 
     # do something $SELECTION has number of actions
     run_action ${selection}
-
     exit 0
-
 }
 
+_defaults
 main "$@"
 
 

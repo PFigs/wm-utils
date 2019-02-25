@@ -20,11 +20,11 @@ function main_menu()
     "2" "RTT Logger" \
     "3" "Program Firmware" \
     "4" "Erase Firmware"  3>&1 1>&2 2>&3)
-    
+
     exitstatus=$?
     if [ $exitstatus = 0 ]; then
-        echo ${option}  
-        exit 0  
+        echo ${option}
+        exit 0
     else
         echo "0"
         exit 1

@@ -17,7 +17,7 @@ function flash_menu(){
 
     tmp_jlink_file="~/.wmflash.jlink"
     eval tmp_jlink_file=${tmp_jlink_file}
-  
+
     fw_dir=$1
     old_dir=$PWD
     cd $fw_dir
@@ -30,10 +30,10 @@ function flash_menu(){
         ui_errorbox "$err"
         echo $err
         exit 1
-    fi     
-    
+    fi
+
     cd ${old_dir}
-    
+
     images_arr=($images)
     images_len=${#images_arr[@]}
     if (( ${#images_len} == 0 )); then
@@ -71,7 +71,7 @@ function flash_menu(){
         ui_errorbox "$err"
         echo $err
         exit 1
-    fi 
+    fi
 
     devices=$(get_device_ids "(FLASH)")
     if ((${#devices} == 0)); then
@@ -91,7 +91,7 @@ function flash_menu(){
     echo "selected:"${fw_file}
 
     cmd="gsub(\"DEVICE\", \"$JLINK_DEVICE\"); gsub(\"FIRMWARE\", \"$fw_file\");"
-    
+
     awk "{${cmd}; print}" $FLASH_JLINK > ${tmp_jlink_file}
 
     for dev in ${devices}; do

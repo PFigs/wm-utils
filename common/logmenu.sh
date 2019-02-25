@@ -19,11 +19,11 @@ function log_menu()
     option=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your option" 15 60 2 \
     "1" "Start Session" \
     "2" "Kill Session"  3>&1 1>&2 2>&3)
-    
+
     exitstatus=$?
     if [ $exitstatus = 0 ]; then
-        echo ${option}  
-        exit 0  
+        echo ${option}
+        exit 0
     else
         echo "0"
         exit 1
@@ -87,18 +87,18 @@ function log_device_menu()
     done
 }
 
-function log_main() 
+function log_main()
 {
       if [ "$@"=="0" ]; then
           option=$(log_menu)
       fi
 
       if [ $option -eq 1 ]; then
-      
-          log_device_menu  
-      
+
+          log_device_menu
+
       elif [ $option -eq 2 ]; then
-      
+
           sessions=$(log_kill_session_menu)
 
           if [ -z "$sessions"  ]; then
@@ -110,7 +110,7 @@ function log_main()
           for session in $sessions; do
              #rtt_kill_session $session
              rtt_delete_session $session
-          done  
+          done
       fi
 
       exit 0

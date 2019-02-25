@@ -44,17 +44,17 @@ function rtt_start_session()
     echo ${rtt_command}
 
     echo ${rtt_command} > "$WM_DIR_RTT_SESSIONS/$rtt_session"
- 
-    chmod a+rwx "$WM_DIR_RTT_SESSIONS/$rtt_session"
-    screen_command="screen -d -m $WM_DIR_RTT_SESSIONS/$rtt_session" 
 
-    #echo ${screen_command} 
-    
+    chmod a+rwx "$WM_DIR_RTT_SESSIONS/$rtt_session"
+    screen_command="screen -d -m $WM_DIR_RTT_SESSIONS/$rtt_session"
+
+    #echo ${screen_command}
+
     $(${screen_command})
 
     killpid=$(ps -ef | grep $rtt_session | grep SCREEN | awk {'print $2}')
-    echo "kill -9 $killpid" > $WM_DIR_RTT_SESSIONS/$rtt_session 
-    echo "rm \$0" >> $WM_DIR_RTT_SESSIONS/$rtt_session 
+    echo "kill -9 $killpid" > $WM_DIR_RTT_SESSIONS/$rtt_session
+    echo "rm \$0" >> $WM_DIR_RTT_SESSIONS/$rtt_session
 
     chmod a+rxw $WM_DIR_RTT_SESSIONS/$rtt_session
 }
@@ -63,10 +63,10 @@ function rtt_start_session()
 #$1 session id
 function rtt_kill_session()
 {
-     pid=$(ps -ef | grep SCREEN | grep $1 | cut -d ' ' -f3) 
+     pid=$(ps -ef | grep SCREEN | grep $1 | cut -d ' ' -f3)
 
      echo "Kill Session: $1 Pid: $pid"
-     
+
      cmd="kill -9 $pid"
 
      echo ${cmd}
@@ -83,13 +83,13 @@ function rtt_delete_session()
 
 function rtt_find_sessions()
 {
-    echo $(ps -ef | grep SCREEN | grep .rttsessions | rev | cut -d '/' -f1 | rev | cut -d '.' -f1)   
+    echo $(ps -ef | grep SCREEN | grep .rttsessions | rev | cut -d '/' -f1 | rev | cut -d '.' -f1)
 }
 
 #$1 telnet port
 function rtt_connect_port()
 {
-    JLinkRTTClient -RTTTelnetPort $1    
+    JLinkRTTClient -RTTTelnetPort $1
 }
 
 if [[ "$BASH_SOURCE" == "$0" ]]

@@ -19,7 +19,6 @@ function ui_debug()
 }
 
 
-
 function ui_errorbox()
 {
     whiptail --title "Error" --msgbox "$1" 8 40
