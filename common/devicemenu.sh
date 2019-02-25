@@ -12,7 +12,12 @@ then
     exit
 fi
 
-
+function device_list_devices()
+{
+    segger_id=1366:1015
+    usb_ids=$(lsusb -v -d ${segger_id} | grep iSerial | awk '{print $3}')
+    echo $usb_ids
+}
 
 function device_get_ids(){
 
