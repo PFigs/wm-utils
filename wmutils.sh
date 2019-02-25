@@ -24,7 +24,14 @@ function _defaults
 function main()
 {
     #check command line arguments
-    selection=$(parse_args "$@")
+
+    if [[ $# -gt 0 ]] ; then
+        parse_args "$@"
+        exit $?
+    else
+        selection=0    
+    fi
+ 
 
     if [ $? -eq 1 ];then
         #exit on error
@@ -34,6 +41,8 @@ function main()
     if [ ${selection} == "0" ]; then
         #enter main menu
         selection=$(main_menu)
+    else
+        exit 0    
     fi
 
     if [ $? -eq 1 ];then

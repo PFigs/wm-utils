@@ -33,7 +33,7 @@ function action_flash()
         exit 1
     fi
 
-    jlink_flash_menu $WM_DIR_IMAGES
+    jlink_flash_menu 
 }
 
 function action_erase()

@@ -6,51 +6,76 @@
 # *
 # */
 
+#set -x
 
-function parse_args()
+function usage() 
 {
-
-    if [ $# -eq "0" ]; then
-        echo "0"
-        exit
-    fi
-
-    usage() { echo "Usage: $0 [-c <flash|erase|build|log>]" 1>&2; exit 1; }
-
-    while getopts ":h:c:" o; do
-        case "${o}" in
-            c)
-                c=${OPTARG}
-                ;;
-            *)
-                usage
-                ;;
-        esac
-    done
-    shift $((OPTIND-1))
-
-    if [ ${c} == "build" ]; then
-        echo "1"
-    elif [ ${c} == "log" ]; then
-        echo "2"
-    elif [ ${c} == "flash" ]; then
-        echo "3"
-    elif [ ${c} == "erase" ]; then
-        echo "4"
-    else
-        echo "0"
-        exit 1
-    fi
-
-
+     echo "Usage: $0 [-c <flash|erase>|list>]" 1>&2; 
+     exit 1
 }
 
 
-if [[ "$BASH_SOURCE" == "$0" ]]
-then
+function flash_device()
+{
+    if [ ! -z "$1" ] && [ ! -z "$2" ]; then
+        jlink_flash_menu "$1" "$2" 
+    fi
+}
+
+function erase_device()
+{
+    if [ ! -z "$1" ]; then
+        jlink_erase_menu "$1" 
+    fi
+}
+
+
+function parse_args()
+{
+   
+    if [ $# -eq "0" ]; then
+        exit 0
+    fi
+
+
+ 
+    while getopts hc:d:f: option 
+    do 
+    case "${option}" 
+    in 
+    c) c=${OPTARG};; 
+    d) d=${OPTARG};; 
+    f) f=${OPTARG};;
+    h) usage;;
+    *) usage;;   
+    esac 
+    done 
+
+    
+
+    if [ ${c} == "flash" ]
+    then
+        flash_device $d $f
+    elif [ ${c} == "erase" ]
+    then
+        erase_device $d
+    elif [ ${c} == "list" ]
+    then
+        device_list_devices
+    fi  
+
+    exit 0
+
+}
+
+    if [[ "$BASH_SOURCE" == "$0" ]];then
+
     parse_args "$@"
-    exit $?
-fi
+    
+
+    fi
+
+
 
 
 

@@ -6,6 +6,8 @@
 # *
 # */
 
+#set -x
+
 if [[ "$BASH_SOURCE" == "$0" ]]
 then
     echo "Please run wmutils.sh"
@@ -18,7 +20,12 @@ function jlink_erase_menu(){
 tmp_jlink_file="~/.wmerase.jlink"
 eval tmp_jlink_file=${tmp_jlink_file}
 
-devices=$(device_get_ids "(ERASE)")
+if [ -z "$1"]; then 
+    devices=$(device_get_ids "(ERASE)")
+else
+    devices=$1
+fi
+
 if ((${#devices} == 0)); then
     err="No devices connected."
     ui_errorbox "$err"
