@@ -68,7 +68,7 @@ function action_build_app()
 {
    clean=" clean"
 
-   make_cmd="make -f makefile app_name="
+   make_cmd="make -f  makefile ${WM_INTERNAL_STACK_BINARIES} app_name="
    cmd1="foo"
    cmd2="bar"
 
@@ -89,6 +89,14 @@ function action_build_app()
           echo $cmd2
           exec $cmd2
 
+          docker run -it --rm \
+            --user=$(id -u):$(id -g) \
+            -w ${WM_DIR_SDK} \
+            --net=none \
+            -v ${WM_DIR_SDK}:${WM_DIR_SDK} \
+            -v ${WM_DIR_STACK}:${WM_DIR_STACK} \
+            ${WM_DOCKER_IMAGE} \
+            bash -c "echo cmd:${cmd2}; exec ${cmd2}"
       done
 
    cd $olddir
