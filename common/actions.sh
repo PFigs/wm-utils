@@ -68,7 +68,7 @@ function action_build_app()
 {
    clean=" clean"
 
-   make_cmd="make -f makefile app_name="
+   make_cmd="make -f makefile ${WM_INTERNAL_STACK_BINARIES} app_name="
    cmd1="foo"
    cmd2="bar"
 
