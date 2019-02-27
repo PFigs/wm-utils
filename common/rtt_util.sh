@@ -28,6 +28,21 @@ function find_free_port()
 
 function rtt_start_session()
 {
+
+    if [[ -z $1 ]]
+    then
+        echo "RTT START SESSION: device id missing"
+        exit 1
+    fi
+
+    if [[ -z $2 ]]
+    then
+        echo "RTT START SESSION: session port missing"
+        exit 1
+    fi
+
+
+
     rtt_session="$1_$2.sh"
 
     ui_debug "rtt_session"
@@ -64,13 +79,20 @@ function rtt_start_session()
 #$1 session id
 function rtt_kill_session()
 {
-     pid=$(ps -ef | grep SCREEN | grep $1 | cut -d ' ' -f3)
+     #echo "KILL $1"
+     pid=$(ps -ef | grep SCREEN | grep $1 | cut -d ' ' -f2)
+
+     if [[ -z "${pid}" ]]
+     then
+         echo "session not found"
+         exit 1
+     fi
 
      ui_debug "Kill Session: $1 Pid: $pid"
 
      cmd="kill -9 $pid"
 
-     ui_debug ${cmd}
+     echo ${cmd}
 
      $(${cmd})
 }
@@ -79,7 +101,24 @@ function rtt_kill_session()
 #$1 session id
 function rtt_delete_session()
 {
-     exec $WM_DIR_RTT_SESSIONS/$1.sh
+
+    if [[ -z $1 ]]
+    then
+        echo "RTT START SESSION: session id missing"
+        exit 1
+    fi
+
+    if [[ -f $FILE ]]
+    then
+        #echo "File $FILE exists."
+        exec $WM_DIR_RTT_SESSIONS/$1.sh
+        exit 0
+    else
+        echo "Session File $WM_DIR_RTT_SESSIONS/$1.sh does not exist."
+        #fallback, kill with PID
+        rtt_kill_session "$1"
+        exit $?
+    fi
 }
 
 function rtt_find_sessions()

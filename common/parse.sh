@@ -17,7 +17,11 @@ function usage()
      echo "    " 1>&2;
      echo "    -l list                             : list connected devices"  1>&2; 
      echo "    " 1>&2; 
-     echo "    -s                                  : show settings" 1>&2; 
+     echo "    -s                                  : show settings" 1>&2;
+     echo "    -r <options>                        : RTT log commands " 1>&2;
+     echo "       start -d [nodeid]                : start logging session"  1>&2; 
+     echo "       kill  -d [session id]            : kill session"  1>&2;  
+     echo "       list                             : list sessions"  1>&2;      
 
 
 
@@ -70,7 +74,7 @@ function parse_args()
 
 
  
-    while getopts hc:d:f:sl option 
+    while getopts hc:d:f:slr: option 
     do 
     case "${option}" 
     in 
@@ -79,12 +83,14 @@ function parse_args()
     f) f=${OPTARG};;
     s) show_settings;;
     l) device_list_devices;;
+    r) r=${OPTARG};;
     h) usage;;
     *) usage;;   
     esac 
     done 
 
     
+
 
     if [[ ${c} == "flash" ]]
     then
@@ -96,6 +102,21 @@ function parse_args()
     then
         device_list_devices
     fi  
+
+
+    if [[ ${r} == "start" ]]
+    then
+        sessionport=$(find_free_port)
+        rtt_start_session ${d} ${sessionport}
+    elif [[ ${r} == "kill" ]]
+    then
+        rtt_delete_session ${d}
+    elif [[ ${r} == "list" ]]
+    then
+        rtt_find_sessions
+    fi  
+
+
 
     exit 0
 

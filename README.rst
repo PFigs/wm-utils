@@ -59,6 +59,9 @@ Usage: ./wmutils.sh COMMAND <OPTIONS>
 
     -s                                  : show settings
 
-
+    -r <options>                        : RTT log commands
+       start -d [nodeid]                : start logging session
+       kill  -d [session id]            : kill session
+       list                             : list sessions
 
 
