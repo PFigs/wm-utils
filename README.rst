@@ -46,4 +46,19 @@ RTT connection can be established to associated telnet port. The sessions can be
 For each active logging session there's a file, for example 000440108848_19745.sh, where 000440108848 is the device id and
 19745 is the telnet port. By running the script the session is killed. Alternatively you may kill the session via menu, by selecting it from the list.
 
+commandline mode:
+------------------
+Developers usually want to have shortcuts for the common operations. by invokin wmutils with '-h' the available commands are printed.
+
+Usage: ./wmutils.sh COMMAND <OPTIONS>
+    -c <options>                        : flash commands
+       erase -d [nodeid]                : erase flash
+       flash -d [nodeid] -f [filename]  : flash firmware image
+
+    -l list                             : list connected devices
+
+    -s                                  : show settings
+
+
+
 
