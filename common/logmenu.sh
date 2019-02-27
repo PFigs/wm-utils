@@ -19,7 +19,9 @@ function log_menu()
     option=$(ui_log_menu)
 
     exitstatus=$?
-    if [ $exitstatus = 0 ]; then
+
+    if [[ $exitstatus == 0 ]]
+    then
         echo ${option}
         exit 0
     else
@@ -57,7 +59,8 @@ function log_kill_session_menu()
         3>&1 1>&2 2>&3)
 
     stat=$?
-    if (( $stat != 0 )); then
+    if [[ $stat != 0 ]]
+    then
         exit 1
     fi
 
@@ -72,7 +75,8 @@ function log_device_menu()
 {
     devices=$(device_get_ids "(LOGGER)")
 
-    if ((${#devices} == 0)); then
+    if [[ ${#devices} == 0 ]]
+    then
         err="No devices connected."
         ui_errorbox "$err"
         echo $err
@@ -87,28 +91,45 @@ function log_device_menu()
 
 function log_main_menu()
 {
-      if [ "$@"=="0" ]; then
+      if [[ "$@"=="0" ]]
+      then
           option=$(log_menu)
       fi
 
-      if [ $option -eq 1 ]; then
+      if [[ $option -eq 1 ]]
+      then
 
           log_device_menu
 
-      elif [ $option -eq 2 ]; then
+      elif [[ $option -eq 2 ]]
+      then
 
           sessions=$(log_kill_session_menu)
 
-          if [ -z "$sessions"  ]; then
+          if [[ -z "$sessions"  ]]
+          then
               ui_errorbox "No Sessions"
               exit 1
 
           fi
 
           for session in $sessions; do
-             #rtt_kill_session $session
+             ui_debug "DELETE $session"
              rtt_delete_session $session
           done
+          
+      elif [[ $option -eq 3 ]]
+      then
+        sessions=$(rtt_find_sessions)
+
+        if [[ -z "$sessions"  ]]
+        then
+            echo "No RTT Sessions"
+            exit 0
+        else
+            echo ${sessions}
+        fi
+
       fi
 
       exit 0

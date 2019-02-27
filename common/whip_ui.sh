@@ -43,10 +43,11 @@ function ui_main_menu()
 
 function ui_log_menu()
 {
-    option=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your option" 15 60 2 \
+    option=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your option" 15 60 3 \
     "1" "Start Session" \
-    "2" "Kill Session"  3>&1 1>&2 2>&3)
- 
+    "2" "Kill Session"  \
+    "3" "List sessions"  3>&1 1>&2 2>&3)
+  
     echo ${option}
 
     exit $?

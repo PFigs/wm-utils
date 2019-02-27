@@ -101,20 +101,22 @@ function rtt_kill_session()
 #$1 session id
 function rtt_delete_session()
 {
-
     if [[ -z $1 ]]
     then
         echo "RTT START SESSION: session id missing"
         exit 1
     fi
 
-    if [[ -f $FILE ]]
+
+    file="$WM_DIR_RTT_SESSIONS/$1.sh" 
+
+    if [[ -f $file ]]
     then
-        #echo "File $FILE exists."
-        exec $WM_DIR_RTT_SESSIONS/$1.sh
+        ui_debug "Session File $FILE exists."
+        exec $file
         exit 0
     else
-        echo "Session File $WM_DIR_RTT_SESSIONS/$1.sh does not exist."
+        ui_debug "Session File $file does not exist."
         #fallback, kill with PID
         rtt_kill_session "$1"
         exit $?
