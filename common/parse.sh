@@ -10,8 +10,10 @@
 
 function usage() 
 {
-     echo "Usage: $0 [-c <flash|erase>|list>]" 1>&2; 
-     exit 1
+     echo "Usage: $0 [-c <flash|erase>|list>] <-d [device id]> <-f [binary.hex]>\\n" 1>&2; 
+     echo "    -c erase -d [nodeid]                : erase flash"  1>&2; 
+     echo "    -c flash -d [nodeid] -f [filename]  : flash firmware image"  1>&2; 
+     echo "    -c list                             : list connected devices"  1>&2; 
 }
 
 
