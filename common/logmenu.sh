@@ -16,9 +16,7 @@ fi
 
 function log_menu()
 {
-    option=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your option" 15 60 2 \
-    "1" "Start Session" \
-    "2" "Kill Session"  3>&1 1>&2 2>&3)
+    option=$(ui_log_menu)
 
     exitstatus=$?
     if [ $exitstatus = 0 ]; then
@@ -31,7 +29,6 @@ function log_menu()
 }
 
 
-
 function log_kill_session_menu()
 {
     ses_ids=$(rtt_find_sessions "(SESSION)")
@@ -39,7 +36,8 @@ function log_kill_session_menu()
     ses_ids_arr=($ses_ids)
     ses_ids_len=${#ses_ids_arr[@]}
 
-    if (( ${#ses_ids} == 0 )); then
+    if [[ ${#ses_ids} == 0 ]]
+    then
         exit 1
     fi
 

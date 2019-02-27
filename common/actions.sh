@@ -47,7 +47,7 @@ function action_erase()
 function run_action()
 {
 
-option=$1
+    option=$1
 
     if [[ $option -eq "1" ]]
     then

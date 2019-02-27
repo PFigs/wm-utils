@@ -16,7 +16,7 @@ function _defaults
 
     this=$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null||echo $0)
 
-    source "${WM_ROOT_DIR}/config/directories.env"
+    source "${WM_ROOT_DIR}/include/directories.env"
     source "${WM_DIR_INCLUDE}/scripts.env"
 }
 

@@ -110,7 +110,7 @@ function jlink_flash_menu(){
         fi        
     fi
 
-    echo "selected:"${fw_file}
+    ui_debug "selected:"${fw_file}
 
     cmd="gsub(\"DEVICE\", \"$JLINK_DEVICE\"); gsub(\"FIRMWARE\", \"$fw_file\");"
 

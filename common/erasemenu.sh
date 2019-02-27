@@ -17,8 +17,8 @@ fi
 
 function jlink_erase_menu(){
 
-tmp_jlink_file="~/.wmerase.jlink"
-eval tmp_jlink_file=${tmp_jlink_file}
+tmp_jlink_file="${HOME}/.wmerase.jlink"
+
 
 if [[ -z "$1" ]]
 then 
@@ -38,7 +38,7 @@ fi
 # Set device only if it is not already set via env
 if [[ ${#JLINK_DEVICE} == 0 ]]
 then
-    JLINK_DEVICE=${EFR}
+    JLINK_DEVICE=${WM_DEFAULT_JLINK_DEVICE}
 fi
 
 fw_file=
