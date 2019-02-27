@@ -17,15 +17,23 @@ function usage()
 
 function flash_device()
 {
-    if [ ! -z "$1" ] && [ ! -z "$2" ]; then
-        jlink_flash_menu "$1" "$2" 
+    if [[ ! -z "$1" ]] && [[ ! -z "$2" ]]
+    then
+        jlink_flash_menu "$1" "$2"
+    else
+        #ui_errorbox "missing parameters"
+        usage  
     fi
 }
 
 function erase_device()
 {
-    if [ ! -z "$1" ]; then
-        jlink_erase_menu "$1" 
+    if [[ ! -z "$1" ]]
+    then
+        jlink_erase_menu "$1"
+    else
+        #ui_errorbox "device id missing"
+        usage
     fi
 }
 
@@ -33,7 +41,8 @@ function erase_device()
 function parse_args()
 {
    
-    if [ $# -eq "0" ]; then
+    if [[ $# -eq "0" ]]
+    then
         exit 0
     fi
 
@@ -53,13 +62,13 @@ function parse_args()
 
     
 
-    if [ ${c} == "flash" ]
+    if [[ ${c} == "flash" ]]
     then
         flash_device $d $f
-    elif [ ${c} == "erase" ]
+    elif [[ ${c} == "erase" ]]
     then
         erase_device $d
-    elif [ ${c} == "list" ]
+    elif [[ ${c} == "list" ]]
     then
         device_list_devices
     fi  
@@ -71,7 +80,6 @@ function parse_args()
     if [[ "$BASH_SOURCE" == "$0" ]];then
 
     parse_args "$@"
-    
 
     fi
 

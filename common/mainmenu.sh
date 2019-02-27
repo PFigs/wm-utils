@@ -22,7 +22,8 @@ function main_menu()
     "4" "Erase Firmware"  3>&1 1>&2 2>&3)
 
     exitstatus=$?
-    if [ $exitstatus = 0 ]; then
+    if [[ $exitstatus = 0 ]]
+    then
         echo ${option}
         exit 0
     else

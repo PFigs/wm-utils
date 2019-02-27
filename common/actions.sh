@@ -28,7 +28,8 @@ function action_logger()
 function action_flash()
 {
     ui_debug "FLASH"
-    if [ -z "${WM_DIR_IMAGES}" ]; then
+    if [[ -z "${WM_DIR_IMAGES}" ]]
+    then
         ui_errorbox "WM_DIR_IMAGES not defined"
         exit 1
     fi
@@ -48,13 +49,17 @@ function run_action()
 
 option=$1
 
-    if [ $option -eq "1" ]; then
+    if [[ $option -eq "1" ]]
+    then
         action_build
-    elif [ $option -eq "2" ]; then
+    elif [[ $option -eq "2" ]]
+    then
         action_logger
-    elif [ $option -eq "3" ]; then
+    elif [[ $option -eq "3" ]]
+    then
         action_flash
-    elif [ $option -eq "4" ]; then
+    elif [[ $option -eq "4" ]]
+    then
         action_erase
     else
         ui_errorbox "invalid action"
@@ -74,9 +79,9 @@ function action_build_app()
 
    arr=("$@")
 
-   olddir=$PWD
+   olddir=${PWD}
 
-   cd $WM_DIR_SDK
+   cd ${WM_DIR_SDK}
 
    ui_debug "Building at $PWD"
 

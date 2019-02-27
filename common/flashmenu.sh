@@ -17,8 +17,9 @@ function jlink_flash_menu(){
 
     tmp_jlink_file="${HOME}/.wmflash.jlink"
 
-    if [ -z "$2" ];then 
-        fw_dir=$WM_DIR_IMAGES
+    if [[ -z "$2" ]]
+    then 
+        fw_dir=${WM_DIR_IMAGES}
 
         old_dir=$PWD
 
@@ -28,7 +29,8 @@ function jlink_flash_menu(){
 
         cd ${old_dir}
 
-        if [ -z "$images" ]; then
+        if [[ -z "$images" ]]
+        then
             err="No images found in $fw_dir!"
             ui_errorbox "$err"
             echo $err
@@ -38,7 +40,8 @@ function jlink_flash_menu(){
         images_arr=($images)
         images_len=${#images_arr[@]}
 
-        if (( ${#images_len} == 0 )); then
+        if [[ ${#images_len} == 0 ]]
+        then
             err="No images found!"
             ui_errorbox "$err"
             echo $err
@@ -46,7 +49,8 @@ function jlink_flash_menu(){
         fi
 
         for img in $images; do
-            if [[ $img == "bl_wm_rtos_app.hex" ]]; then
+            if [[ $img == "bl_wm_rtos_app.hex" ]]
+            then
                 rl_imgs="$rl_imgs $img $img 1"
             else
                 rl_imgs="$rl_imgs $img $img 0"
@@ -60,14 +64,16 @@ function jlink_flash_menu(){
             3>&1 1>&2 2>&3)
         stat=$?
 
-        if (( $stat != 0 )); then
+        if [[ $stat != 0 ]]
+        then
             err="Cancelled"
             ui_errorbox "$err"
             echo $err
             exit 1
         fi
 
-        if [ -z "$image" ]; then
+        if [[ -z "$image" ]]
+        then
 
             err="No image selected!"
             ui_errorbox "$err"
@@ -76,7 +82,9 @@ function jlink_flash_menu(){
         fi
 
         devices=$(device_get_ids "(FLASH)")
-        if ((${#devices} == 0)); then
+        
+        if [[ ${#devices} == 0 ]]
+        then
 
             err="No devices connected."
             ui_errorbox "$err"
@@ -85,7 +93,8 @@ function jlink_flash_menu(){
         fi
 
         # Set device only if it is not already set via env
-        if ((${#JLINK_DEVICE} == 0)); then
+        if [[ ${#JLINK_DEVICE} == 0 ]]
+        then
             JLINK_DEVICE=$EFR
         fi
 
@@ -95,7 +104,8 @@ function jlink_flash_menu(){
         devices=$1
         fw_file=$2
         # Set device only if it is not already set via env
-        if ((${#JLINK_DEVICE} == 0)); then
+        if [[${#JLINK_DEVICE} == 0]]
+        then
             JLINK_DEVICE=$EFR
         fi        
     fi

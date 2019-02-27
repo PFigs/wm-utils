@@ -20,13 +20,15 @@ function jlink_erase_menu(){
 tmp_jlink_file="~/.wmerase.jlink"
 eval tmp_jlink_file=${tmp_jlink_file}
 
-if [ -z "$1"]; then 
+if [[ -z "$1" ]]
+then 
     devices=$(device_get_ids "(ERASE)")
 else
     devices=$1
 fi
 
-if ((${#devices} == 0)); then
+if [[ ${#devices} == 0 ]]
+then
     err="No devices connected."
     ui_errorbox "$err"
     echo $err
@@ -34,9 +36,11 @@ if ((${#devices} == 0)); then
 fi
 
 # Set device only if it is not already set via env
-if ((${#JLINK_DEVICE} == 0)); then
-    JLINK_DEVICE=$EFR
+if [[ ${#JLINK_DEVICE} == 0 ]]
+then
+    JLINK_DEVICE=${EFR}
 fi
+
 fw_file=
 cmd="gsub(\"DEVICE\", \"$JLINK_DEVICE\");"
 awk "{$cmd; print}" $ERASE_JLINK > ${tmp_jlink_file}

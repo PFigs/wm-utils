@@ -17,7 +17,8 @@ function build_get_sdk_projects()
 {
     projects=$(ls ${WM_DIR_SDK}/source) 
 
-    if [ $? -ne 0 ]; then
+    if [[ $? -ne 0 ]]
+    then
         exit 1
     fi
 
@@ -28,19 +29,22 @@ function build_menu()
 {
     projects=$(build_get_sdk_projects)
 
-    if [ -z "${projects}" ]; then 
+    if [[ -z "${projects}" ]]
+    then 
         ui_errorbox "SDK path $WM_DIR_SDK not accessible"
         exit 1
     fi
 
     prj_ids_arr=($projects)
     prj_ids_len=${#prj_ids_arr[@]}
-    if (( ${#projects} == 0 )); then
+    if [[ ${#projects} == 0 ]]
+    then
         exit 1
     fi
 
     for id in $projects; do
-        if ((${#first} == 0)); then
+        if [[ ${#first} == 0 ]]
+        then
             cl_ids="$id $id 1"
             first=false
         else
@@ -56,7 +60,8 @@ function build_menu()
 
 
     stat=$?
-    if (( $stat != 0 )); then
+    if [[ ${stat} != 0 ]]
+    then
         exit 1
     fi
 
