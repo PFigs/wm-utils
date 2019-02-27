@@ -10,11 +10,31 @@
 
 function usage() 
 {
-     echo "Usage: $0 [-c <flash|erase>|list>] <-d [device id]> <-f [binary.hex]>\\n" 1>&2; 
-     echo "    -c erase -d [nodeid]                : erase flash"  1>&2; 
-     echo "    -c flash -d [nodeid] -f [filename]  : flash firmware image"  1>&2; 
-     echo "    -c list                             : list connected devices"  1>&2; 
+     echo "Usage: $0 COMMAND <OPTIONS>" 1>&2; 
+     echo "    -c <options>                        : flash commands " 1>&2;
+     echo "       erase -d [nodeid]                : erase flash"  1>&2; 
+     echo "       flash -d [nodeid] -f [filename]  : flash firmware image"  1>&2; 
+     echo "    " 1>&2;
+     echo "    -l list                             : list connected devices"  1>&2; 
+     echo "    " 1>&2; 
+     echo "    -s                                  : show settings" 1>&2; 
+
+
+
 }
+
+function show_settings()
+{
+    echo "Settings"
+
+    echo "Device family: ${WM_DEFAULT_JLINK_DEVICE}"
+    echo "SDK projects directory: ${WM_DIR_SDK}"
+    echo "Firmware images directory: ${WM_DIR_IMAGES}"
+    echo "Connected Devices"
+    device_list_devices
+
+}
+
 
 
 function flash_device()
@@ -50,13 +70,15 @@ function parse_args()
 
 
  
-    while getopts hc:d:f: option 
+    while getopts hc:d:f:sl option 
     do 
     case "${option}" 
     in 
     c) c=${OPTARG};; 
     d) d=${OPTARG};; 
     f) f=${OPTARG};;
+    s) show_settings;;
+    l) device_list_devices;;
     h) usage;;
     *) usage;;   
     esac 

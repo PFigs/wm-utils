@@ -95,7 +95,7 @@ function jlink_flash_menu(){
         # Set device only if it is not already set via env
         if [[ ${#JLINK_DEVICE} == 0 ]]
         then
-            JLINK_DEVICE=$EFR
+            JLINK_DEVICE=${WM_DEFAULT_JLINK_DEVICE}
         fi
 
         fw_file=$fw_dir/${image}
@@ -106,7 +106,7 @@ function jlink_flash_menu(){
         # Set device only if it is not already set via env
         if [[${#JLINK_DEVICE} == 0]]
         then
-            JLINK_DEVICE=$EFR
+            JLINK_DEVICE=${WM_DEFAULT_JLINK_DEVICE}
         fi        
     fi
 

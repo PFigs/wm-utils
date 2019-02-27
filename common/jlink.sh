@@ -10,10 +10,6 @@ fi
 function jlink_connect_device()
 {
     JLINKEXE='JLinkExe'
-    if [[ ${#EFR} == 0 ]]
-    then
-        EFR=EFR32MG12P332F1024GL125
-    fi
 
     devs=$(device_get_ids "JLink")
     
@@ -25,7 +21,7 @@ function jlink_connect_device()
    
     devs_arr=( $devs )
 
-    $JLINKEXE -SelectEmuBySN ${devs_arr[0]} -if swd -device $EFR -autoconnect 1 -speed 4000
+    $JLINKEXE -SelectEmuBySN ${devs_arr[0]} -if swd -device ${WM_DEFAULT_JLINK_DEVICE} -autoconnect 1 -speed 4000
 }
 
 
