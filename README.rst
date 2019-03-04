@@ -52,16 +52,16 @@ Developers usually want to have shortcuts for the common operations. by invoking
 
 
     Usage: ./wmutils.sh COMMAND <OPTIONS>
-        --command <options>                       : flash commands
-        erase --device [nodeid]                : erase flash
-        flash --device [nodeid] --file [filename]  : flash firmware image
+        --command <options>                             : flash commands
+            erase --device [nodeid]                     : erase flash
+            flash --device [nodeid] --file [filename]   : flash firmware image
 
-        --list      t                             : list connected devices
+        --list                                          : list connected devices
 
-        --settings                                : show settings
-        --rtt <options>                           : RTT log commands
-        start --device [deviceid]              : start logging session
-        kill  --device [session id]            : kill session
-        list                                   : list sessions
+        --settings                                      : show settings
+        --rtt <options>                                 : RTT log commands
+            start --device [deviceid]                   : start logging session
+            kill  --device [session id]                 : kill session
+            list                                        : list sessions
         
         
