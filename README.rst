@@ -48,7 +48,7 @@ For each active logging session there's a file, for example 000440108848_19745.s
 
 commandline mode:
 ------------------
-Developers usually want to have shortcuts for the common operations. by invoking wmutils with '-h' or ' --help' the available commands are printed.:
+Developers usually want to have shortcuts for the common operations. by invoking wmutils with '-h' or ' --help' the available commands are printed. ::
 
 
     Usage: ./wmutils.sh COMMAND <OPTIONS>
