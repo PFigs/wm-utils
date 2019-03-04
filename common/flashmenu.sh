@@ -12,6 +12,20 @@ then
     exit
 fi
 
+function check_file()
+{
+    file="$1" 
+
+    if [[ -f $file ]]
+    then
+        ui_debug "Firmware File $FILE exists."
+    else
+        echo "Firmware File $file does not exist."
+        #fallback, kill with PID
+        exit $?
+    fi
+}
+
 
 function jlink_flash_menu(){
 
@@ -103,12 +117,15 @@ function jlink_flash_menu(){
     else
         devices=$1
         fw_file=$2
+ 
         # Set device only if it is not already set via env
-        if [[${#JLINK_DEVICE} == 0]]
+        if [[ ${#JLINK_DEVICE} == 0 ]]
         then
             JLINK_DEVICE=${WM_DEFAULT_JLINK_DEVICE}
         fi        
     fi
+
+    check_file ${fw_file}
 
     ui_debug "selected:"${fw_file}
 
