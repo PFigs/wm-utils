@@ -1,53 +1,80 @@
-wm-utils
+WM-UTILS
 ========
 
-WM-UTILS is an utility to help you get started with WM software.
+WM-UTILS allows you to build, flash and log (requires RTT access)
+all the devices connected to your host in a blink of an eye.
 
-Build, flash and log* all the devices connected to your host in a blink of an eye.
+WM-UTILS runs over bash shell and it's built around JLink tools and GNU make.
+
+WM-UTILS has support for an `interactive`_ and `non-interactive`_ session.
+
+In the interactive session, you pick your choices from a menu.
+
+In the non-interactive session, you define what WM-UTILS should do with a
+single command line mode.
 
 
-wm-utils is intended to be run on bash shell and it's built around JLink tools and GNU make.
+Configuration
+=============
 
-configuration:
-wm-utils is part of the Wirepas SDK and should have sane default settings preconfigured.
+WM-UTILS requires sane configuration parameters in order to operate correctly.
 
-config/user.env
----------------
-WM_DIR_SDK=${WM_DIR_SDK:-"${HOME}/wmsdk"}
-WM_DIR_IMAGES=$WM_DIR_SDK/build
+The config/user.env file defines the user configuration regarding the location
+of the WM SDK and the device model to connect to.
 
-#Select default device
-EFR=EFR32MG12P332F1024GL125
-NRF=nrf52
+==================================================  ===================================================================================
+**Variable**                                          **Definition**
+==================================================  ===================================================================================
+**WM_DIR_SDK**                                        Defines the path to the WM SDK
+**WM_DIR_IMAGES**                                     Defines the path to the WM binary images (defaults to ${WM SDK}/build)
+**EFR**                                               The EFR device model being targeted (defaults to EFR32MG12P332F1024GL125)
+**NRF**                                               The NRF device model being targeted (defaults to nrf52)
+**WM_DEFAULT_JLINK_DEVICE**                           Which platform to target (NRF or EFR)
+**WM_CFG_SETTINGS_IMAGE**                             The registry and name of the docker image containing the wm-config settings
+**WM_CFG_SETTINGS_VERSION**                           The image tag to pull
+==================================================  ===================================================================================
 
-#WM_DEFAULT_JLINK_DEVICE=${NRF}
-WM_DEFAULT_JLINK_DEVICE=${EFR}
 
-WM_DIR_SDK points to sample projects directory of the SDK and WM_DIR_IMAGES is the default location for the firmware images.
-Default device configures JLinkExe connection correctly.
+.. _interactive:
+Interactive mode
+================
 
-building:
+Building
 ---------
 Select project to build from the menu. New projects are added automatically to the list.
 
-Flashing:
----------
-Connect devices using USB. Select connected devices to be flashed and desired firmware hex file. 
 
-Erasing:
+Flashing
+---------
+Connect devices using USB. Select connected devices to be flashed and desired firmware hex file.
+
+
+Erasing
 --------
 Connect devices using USB. Select connected devices to be erased.
 
-Logging:
+
+Logging
 --------
-Connect devices using USB. Select devices where logging should be started. JLinkExe is ran in the background screen session.
-RTT connection can be established to associated telnet port. The sessions can be found from .rttsession directory. 
+
+*This is an internal feature as it requires access to the RTT ports*
+
+Connect devices using USB. Select devices where logging should be started.
+JLinkExe is ran in the background screen session.
+
+RTT connection can be established to associated telnet port. The sessions can be found from .rttsession directory.
 
 For each active logging session there's a file, for example 000440108848_19745.sh, where 000440108848 is the device id and
-19745 is the telnet port. By running the script the session is killed. Alternatively you may kill the session via menu, by selecting it from the list.
+19745 is the telnet port. By running the script the session is killed.
 
-commandline mode:
-------------------
+Alternatively you may kill the session via menu, by selecting it from the list.
+
+
+
+.. _non-interactive:
+Non-interactive mode
+====================
+
 Developers usually want to have shortcuts for the common operations. by invoking wmutils with '-h' or ' --help' the available commands are printed. ::
 
 
@@ -63,5 +90,11 @@ Developers usually want to have shortcuts for the common operations. by invoking
             start --device [deviceid]                   : start logging session
             kill  --device [session id]                 : kill session
             list                                        : list sessions
-        
-        
+
+
+
+License
+------------
+Copyright 2019 Wirepas Ltd. All Rights Reserved. See file LICENSE for
+full license details.
+
