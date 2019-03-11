@@ -1,0 +1,4 @@
+# Wirepas Oy
+
+pycryptodome==3.7.3
+crc16==0.1.1
