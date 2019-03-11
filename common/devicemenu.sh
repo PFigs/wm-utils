@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
+#/* Copyright 2019 Wirepas Ltd. All Rights Reserved.
 # *
 # * See file LICENSE.txt for full license details.
 # *
@@ -12,14 +12,15 @@ then
     exit
 fi
 
-function device_list_devices()
+function device_list_devices
 {
     segger_id=1366:1015
     usb_ids=$(lsusb -v -d ${segger_id} | grep iSerial | awk '{print $3}')
     echo $usb_ids
 }
 
-function device_get_ids(){
+function device_get_ids
+{
 
     segger_id=1366:1015
 

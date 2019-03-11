@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
-# *
-# * See file LICENSE.txt for full license details.
-# *
-# */
+# Wirepas Oy
 
 if [[ "$BASH_SOURCE" == "$0" ]]
 then
@@ -12,7 +7,7 @@ then
     exit
 fi
 
-function check_file()
+function check_file
 {
     file="$1" 
 
@@ -27,7 +22,8 @@ function check_file()
 }
 
 
-function jlink_flash_menu(){
+function jlink_flash_menu
+{
 
     tmp_jlink_file="${HOME}/.wmflash.jlink"
 
@@ -141,6 +137,5 @@ function jlink_flash_menu(){
 
     rm ${tmp_jlink_file}
 
-exit 0
-
+    exit 0
 }

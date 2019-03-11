@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
+#/* Copyright 2019 Wirepas Ltd. All Rights Reserved.
 # *
 # * See file LICENSE.txt for full license details.
 # *
@@ -13,7 +13,7 @@ then
 fi
 
 
-function build_get_sdk_projects()
+function build_get_sdk_projects
 {
     projects=$(ls ${WM_DIR_SDK}/source) 
 
@@ -25,7 +25,7 @@ function build_get_sdk_projects()
     echo $projects
 }
 
-function build_menu()
+function build_menu
 {
     projects=$(build_get_sdk_projects)
 
@@ -71,4 +71,3 @@ function build_menu()
 
     exit 0
 }
-

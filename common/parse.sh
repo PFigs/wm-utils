@@ -1,12 +1,5 @@
 #!/usr/bin/env bash
-
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
-# *
-# * See file LICENSE.txt for full license details.
-# *
-# */
-
-#set -x
+# Wirepas Oy
 
 #globals
 c="foo"
@@ -17,8 +10,7 @@ r="foo"
 f="foo"
 
 
-
-function _parse_long()
+function _parse_long
 {
     # Gather commands
     POSITIONAL=()
@@ -96,9 +88,7 @@ function _parse_long()
 }
 
 
-
-
-function usage() 
+function usage 
 {
      echo "Usage: $0 COMMAND <OPTIONS>" 1>&2; 
      echo "    --command <options>                       : flash commands " 1>&2;
@@ -115,7 +105,8 @@ function usage()
 
 }
 
-function show_settings()
+
+function show_settings
 {
     echo "Settings"
 
@@ -128,8 +119,7 @@ function show_settings()
 }
 
 
-
-function flash_device()
+function flash_device
 {
 
     if [[ ! -z "$1" ]] && [[ ! -z "$2" ]]
@@ -141,7 +131,7 @@ function flash_device()
     fi
 }
 
-function erase_device()
+function erase_device
 {
     if [[ ! -z "$1" ]]
     then
@@ -153,7 +143,7 @@ function erase_device()
 }
 
 
-function parse_args()
+function parse_args
 {
    
     if [[ $# -eq "0" ]]
@@ -201,13 +191,8 @@ function parse_args()
 
 }
 
-    if [[ "$BASH_SOURCE" == "$0" ]];then
 
+if [[ "$BASH_SOURCE" == "$0" ]]
+then
     parse_args "$@"
-
-    fi
-
-
-
-
-
+fi

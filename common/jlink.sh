@@ -7,7 +7,7 @@ then
 fi
 
 
-function jlink_connect_device()
+function jlink_connect_device
 {
     JLINKEXE='JLinkExe'
 
@@ -25,10 +25,7 @@ function jlink_connect_device()
 }
 
 
-
-
 if [[ "$BASH_SOURCE" == "$0" ]]
 then
     jlink_connect_device
 fi
-

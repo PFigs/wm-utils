@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
-# *
-# * See file LICENSE.txt for full license details.
-# *
-# */
+# Wirepas Oy
 
 
 if [[ "$BASH_SOURCE" == "$0" ]]
@@ -13,7 +8,7 @@ then
     exit
 fi
 
-function ui_debug()
+function ui_debug
 {
     if [[ ! -z ${WM_DEBUG} ]]
     then
@@ -22,12 +17,12 @@ function ui_debug()
 }
 
 
-function ui_errorbox()
+function ui_errorbox
 {
     whiptail --title "Error" --msgbox "$1" 8 40
 }
 
-function ui_main_menu()
+function ui_main_menu
 {
     option=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your option" 15 60 4 \
     "1" "Build Applications" \
@@ -41,7 +36,7 @@ function ui_main_menu()
 }
 
 
-function ui_log_menu()
+function ui_log_menu
 {
     option=$(whiptail --title "Wirepas Firmware Utilities" --menu "Choose your option" 15 60 3 \
     "1" "Start Session" \

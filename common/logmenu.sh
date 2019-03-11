@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
-# *
-# * See file LICENSE.txt for full license details.
-# *
-# */
+# Wirepas Oy
 
 if [[ "$BASH_SOURCE" == "$0" ]]
 then
@@ -13,8 +8,7 @@ then
 fi
 
 
-
-function log_menu()
+function log_menu
 {
     option=$(ui_log_menu)
 
@@ -31,7 +25,7 @@ function log_menu()
 }
 
 
-function log_kill_session_menu()
+function log_kill_session_menu
 {
     ses_ids=$(rtt_find_sessions "(SESSION)")
 
@@ -71,7 +65,7 @@ function log_kill_session_menu()
 
 
 
-function log_device_menu()
+function log_device_menu
 {
     devices=$(device_get_ids "(LOGGER)")
 
@@ -89,7 +83,7 @@ function log_device_menu()
     done
 }
 
-function log_main_menu()
+function log_main_menu
 {
       if [[ "$@"=="0" ]]
       then

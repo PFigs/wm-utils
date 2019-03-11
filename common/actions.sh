@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
-# *
-# * See file LICENSE.txt for full license details.
-# *
-# */
+# Wirepas Oy
 
 
 if [[ "$BASH_SOURCE" == "$0" ]]
@@ -13,19 +8,19 @@ then
     exit
 fi
 
-function action_build()
+function action_build
 {
     ui_debug "BUILD"
     build_menu
 }
 
-function action_logger()
+function action_logger
 {
     ui_debug "LOG"
     log_main_menu
 }
 
-function action_flash()
+function action_flash
 {
     ui_debug "FLASH"
     if [[ -z "${WM_DIR_IMAGES}" ]]
@@ -37,14 +32,14 @@ function action_flash()
     jlink_flash_menu 
 }
 
-function action_erase()
+function action_erase
 {
     ui_debug "ERASE"
     jlink_erase_menu
 }
 
 # $1 :  input number of action
-function run_action()
+function run_action
 {
 
     option=$1
@@ -69,23 +64,23 @@ function run_action()
 }
 
 # input: list of target apps as an array
-function action_build_app()
+function action_build_app
 {
-   clean=" clean"
+    clean=" clean"
 
-   make_cmd="make -f makefile app_name="
-   cmd1="foo"
-   cmd2="bar"
+    make_cmd="make -f makefile app_name="
+    cmd1="foo"
+    cmd2="bar"
 
-   arr=("$@")
+    arr=("$@")
 
-   olddir=${PWD}
+    olddir=${PWD}
 
-   cd ${WM_DIR_SDK}
+    cd ${WM_DIR_SDK}
 
-   ui_debug "Building at $PWD"
+    ui_debug "Building at $PWD"
 
-   for i in "${arr[@]}";
+    for i in "${arr[@]}";
       do
           target=${i//\"/}
           cmd1=$make_cmd$target$clean
@@ -96,7 +91,6 @@ function action_build_app()
 
       done
 
-   cd $olddir
+    cd $olddir
 
 }
-

@@ -1,14 +1,9 @@
 #!/usr/bin/env bash
-
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
-# *
-# * See file LICENSE.txt for full license details.
-# *
-# */
+# Wirepas Oy
 
 
 #find free tcp port
-function find_free_port()
+function find_free_port
 {
     lowerport=19200
     upperport=19999
@@ -22,11 +17,9 @@ function find_free_port()
 }
 
 
-
 # $1 Segger ID
 # $2 Telnet Port
-
-function rtt_start_session()
+function rtt_start_session
 {
 
     if [[ -z $1 ]]
@@ -77,7 +70,7 @@ function rtt_start_session()
 
 #finds session pid from ps ands kills it
 #$1 session id
-function rtt_kill_session()
+function rtt_kill_session
 {
      #echo "KILL $1"
      pid=$(ps -ef | grep SCREEN | grep $1 | cut -d ' ' -f2)
@@ -99,7 +92,7 @@ function rtt_kill_session()
 
 #kills session using session file
 #$1 session id
-function rtt_delete_session()
+function rtt_delete_session
 {
     if [[ -z $1 ]]
     then
@@ -123,13 +116,13 @@ function rtt_delete_session()
     fi
 }
 
-function rtt_find_sessions()
+function rtt_find_sessions
 {
     echo $(ps -ef | grep SCREEN | grep .rttsessions | rev | cut -d '/' -f1 | rev | cut -d '.' -f1)
 }
 
 #$1 telnet port
-function rtt_connect_port()
+function rtt_connect_port
 {
     JLinkRTTClient -RTTTelnetPort $1
 }

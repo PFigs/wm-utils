@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
-# *
-# * See file LICENSE.txt for full license details.
-# *
-# */
+# Wirepas Oy
 
 if [[ "$BASH_SOURCE" == "$0" ]]
 then
@@ -13,7 +8,7 @@ then
 fi
 
 
-function main_menu()
+function main_menu
 {
     option=$(ui_main_menu)
 

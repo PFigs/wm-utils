@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-
-#/* Copyright 2018 Wirepas Ltd. All Rights Reserved.
-# *
-# * See file LICENSE.txt for full license details.
-# *
-# */
+# Wirepas Oy
 
 ## _defaults
 ## sources main functions and stores information regarding the location of
@@ -21,7 +16,7 @@ function _defaults
 }
 
 
-function main()
+function main
 {
     #check command line arguments
 
