@@ -5,11 +5,24 @@ set -o nounset
 set -o errexit
 set -o errtrace
 
-GCC_ARCHIVE=${GCC_ARCHIVE:-"gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2"}
-GCC_INSTALL_PATH=${GCC_INSTALL_PATH:-"${HOME}/opt"}
 
-JLINK_ARCHIVE=${JLINK_ARCHIVE:-"JLink_Linux_V644a_x86_64.tgz"}
-JLINK_INSTALL_PATH=${JLINK_INSTALL_PATH:-"${HOME}/opt"}
+function _defaults
+{
+    GCC_ARCHIVE=${GCC_ARCHIVE:-"gcc-arm-none-eabi-4_8-2014q3-20140805-linux.tar.bz2"}
+    GCC_INSTALL_PATH=${GCC_INSTALL_PATH:-"${HOME}/opt"}
+
+    ARCHITECTURE=$(uname -m)
+
+    if [ "${ARCHITECTURE}" == "armv7l" ]
+    then
+        JLINK_ARCHIVE=${JLINK_ARCHIVE:-"JLink_Linux_arm.tgz"}
+    else
+        JLINK_ARCHIVE=${JLINK_ARCHIVE:-"JLink_Linux_V644a_x86_64.tgz"}
+    fi
+    JLINK_INSTALL_PATH=${JLINK_INSTALL_PATH:-"${HOME}/opt"}
+}
+
+
 
 function fetch_gcc
 {
@@ -20,7 +33,7 @@ function fetch_gcc
         mkdir -p ${GCC_INSTALL_PATH}
         wget ${_gcc_url}
         tar -xjvf ${GCC_ARCHIVE} -C ${GCC_INSTALL_PATH}
-        rm -r ${GCC_INSTALL_PATH}
+        rm -r ${GCC_ARCHIVE}
     fi
 
     PATH="${GCC_INSTALL_PATH}/gcc-arm-none-eabi-4_8-2014q3/bin:$PATH"
@@ -36,9 +49,12 @@ function fetch_jlink
         echo ""
         read -n 1 -s -r -p "Press any key to continue"
         echo ""
-        echo "Please move the archive to $(pwd)"
-        read -n 1 -s -r -p "Press any key to continue"
-        echo ""
+        if [[ ! -f ${JLINK_ARCHIVE} ]]
+        then
+            echo "Please move the archive to $(pwd)"
+            read -n 1 -s -r -p "Press any key to continue"
+            echo ""
+        fi
         tar -xvzf ${JLINK_ARCHIVE} -C ${JLINK_INSTALL_PATH}
         rm -r ${JLINK_ARCHIVE}
     fi
@@ -66,6 +82,7 @@ function install_python_packages
 
 function _main
 {
+    _defaults
     install_system
     install_python_packages
     fetch_gcc
