@@ -1,0 +1,6 @@
+workspace\.code-workspace
+*.tar*
+*.hex
+*.tgz*
+*.tmp
+*~
