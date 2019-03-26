@@ -22,7 +22,7 @@ function action_flash
         exit 1
     fi
 
-    jlink_flash_menu 
+    jlink_flash_menu
 }
 
 function action_erase
@@ -61,7 +61,17 @@ function action_build_app
 {
     clean=" clean"
 
-    make_cmd="make -f makefile app_name="
+    make_cmd="make -f makefile "
+    board_selection="target_board=${WM_UTS_TARGET_BOARD} "
+    app_selection="app_name="
+
+    if [[ -z ${WM_UTS_TARGET_BOARD} ]]
+    then
+        board_selection=""
+    fi
+
+    make_cmd=$make_cmd${board_selection}${app_selection}
+
     cmd1="foo"
     cmd2="bar"
 
