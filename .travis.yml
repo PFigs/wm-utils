@@ -1,0 +1,13 @@
+language: bash
+
+services:
+  - docker
+
+dist: "xenial"
+
+install:
+  - "./.ci/install-devtools.sh"
+
+script:
+  - "./.ci/bundle.sh"
+  - SKIP_JLINK=true INSTALL_SYSTEM_WIDE=false "./setup.sh"

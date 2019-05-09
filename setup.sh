@@ -6,6 +6,7 @@ set -o errexit
 set -o errtrace
 
 INSTALL_SYSTEM_PKG=${1:-"false"}
+SKIP_JLINK=${SKIP_JLINK:-"false"}
 
 BUILD_VERSION="1.0.0"
 
@@ -195,7 +196,10 @@ function _main
     fi
 
     setup_gcc
-    setup_jlink
+    if [[ "${SKIP_JLINK}" == "false" ]]
+    then
+        setup_jlink
+    fi
     setup_wmutils
 }
 

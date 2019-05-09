@@ -1,0 +1,8 @@
+
+wmutil*tar*
+*/.git*
+*/build-*.txt
+*/utils*
+*/*tmp
+*/*~
+**~

@@ -12,7 +12,7 @@ TAR_EXCLUDE_RULES=".tarignore"
 
 
 BUILD_VERSION=$(git log -n 1 --oneline --format=%H)
-TARGETS=("./bin/wm-config.sh" "./bin/wmutils-settings-updater.sh")
+TARGETS=( "./bin/wm-utils.sh" )
 
 
 function _fill_and_pack
