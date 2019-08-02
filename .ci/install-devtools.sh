@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Wirepas Oy
+# Copyright 2019 Wirepas Ltd licensed under Apache License, Version 2.0
 
 set -e
 

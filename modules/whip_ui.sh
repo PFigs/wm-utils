@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Wirepas Oy
+# Copyright 2019 Wirepas Ltd licensed under Apache License, Version 2.0
 
 function ui_debug
 {
@@ -22,7 +22,7 @@ function ui_main_menu
     "2" "RTT Logger" \
     "3" "Program Firmware" \
     "4" "Erase Firmware"  3>&1 1>&2 2>&3)
- 
+
     echo ${option}
 
     exit $?
@@ -35,7 +35,7 @@ function ui_log_menu
     "1" "Start Session" \
     "2" "Kill Session"  \
     "3" "List sessions"  3>&1 1>&2 2>&3)
-  
+
     echo ${option}
 
     exit $?

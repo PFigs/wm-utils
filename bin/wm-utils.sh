@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Wirepas Oy
+# Copyright 2019 Wirepas Ltd licensed under Apache License, Version 2.0
 
 #set -o nounset
 set -o errexit
@@ -13,7 +13,7 @@ function _import_modules
 {
     for CFILE in ${WM_UTS_SERVICE_HOME}/modules/*.sh
     do
-        source ${CFILE} 
+        source ${CFILE}
     done
 
     trap 'wmutils_error "${BASH_SOURCE}:${LINENO} (rc: ${?})"' ERR
@@ -30,7 +30,7 @@ function _defaults
     HOST_ARCHITECTURE=$(uname -m)
 
     WM_UTS_SERVICE_HOME=${WM_UTS_SERVICE_HOME:-"${HOME}/wirepas/wm-utils"}
-    
+
     set -o allexport
     source "${WM_UTS_SERVICE_HOME}/environment/directories.env"
     source "${WM_UTS_SERVICE_HOME}/environment/user.env"
@@ -60,9 +60,9 @@ function main
         parse_args "$@"
         exit $?
     else
-        selection=0    
+        selection=0
     fi
- 
+
 
     if [[ $? -eq 1 ]]
     then
@@ -75,7 +75,7 @@ function main
         #enter main menu
         selection=$(main_menu)
     else
-        exit 0    
+        exit 0
     fi
 
     if [[ $? -eq 1 ]]

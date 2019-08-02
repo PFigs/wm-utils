@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Wirepas Oy
+# Copyright 2019 Wirepas Ltd licensed under Apache License, Version 2.0
 
 
 #find free tcp port
@@ -101,7 +101,7 @@ function rtt_delete_session
     fi
 
 
-    file="$WM_UTS_RTT_SESSIONS/$1.sh" 
+    file="$WM_UTS_RTT_SESSIONS/$1.sh"
 
     if [[ -f $file ]]
     then

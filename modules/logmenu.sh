@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Wirepas Oy
+# Copyright 2019 Wirepas Ltd licensed under Apache License, Version 2.0
 
 function log_menu
 {
@@ -104,7 +104,7 @@ function log_main_menu
              ui_debug "DELETE $session"
              rtt_delete_session $session
           done
-          
+
       elif [[ $option -eq 3 ]]
       then
         sessions=$(rtt_find_sessions)

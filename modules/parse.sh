@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# Wirepas Oy
+# Copyright 2019 Wirepas Ltd licensed under Apache License, Version 2.0
 
 #globals
 c="foo"
-d="foo" 
+d="foo"
 f="foo"
-l="foo" 
+l="foo"
 r="foo"
 f="foo"
 
@@ -20,12 +20,12 @@ function _parse_long
 
     case $key in
         "-c" | "--command")
-        #echo $1 $2 
+        #echo $1 $2
         c=$2
 
         if [[ -z "${c}" ]]
         then
-        
+
         echo "invalid command"
         usage
         exit
@@ -36,18 +36,18 @@ function _parse_long
         ;;
         "-l" | "--list")
         c="list"
-        #echo $1 $2 
+        #echo $1 $2
         shift # past argument
         #shift
-        ;;        
-        "-s" | "--settings")   
+        ;;
+        "-s" | "--settings")
         #echo $1 $2
-        s="settings" 
+        s="settings"
         shift # past argument
         shift
         ;;
         "-r" | "--rtt")
-        #echo $1 $2 
+        #echo $1 $2
         r=$2
 
         if [[ -z "${r}" ]]
@@ -61,27 +61,27 @@ function _parse_long
         shift
         ;;
          "-d" | "--device")
-        #echo $1 $2 
+        #echo $1 $2
         d="$2"
         shift # past argument
         shift
         ;;
          "-h" | "--help")
-        #echo $1 $2 
+        #echo $1 $2
         h="help"
         shift # past argument
         #shift
         ;;
         "-f" | "--file")
-        #echo $1 $2 
+        #echo $1 $2
         f="$2"
         shift # past argument
         shift
-        ;;                         
+        ;;
         "--debug" )
         set -x
         shift
-        ;;                      
+        ;;
         *)
         echo "unknown parameter $1"
         exit 1
@@ -91,20 +91,20 @@ function _parse_long
 }
 
 
-function usage 
+function usage
 {
-     echo "Usage: $0 COMMAND <OPTIONS>" 1>&2; 
+     echo "Usage: $0 COMMAND <OPTIONS>" 1>&2;
      echo "    --command <options>                       : flash commands " 1>&2;
-     echo "       erase --device [nodeid]                : erase flash"  1>&2; 
-     echo "       flash --device [nodeid] --file [filename]  : flash firmware image"  1>&2; 
+     echo "       erase --device [nodeid]                : erase flash"  1>&2;
+     echo "       flash --device [nodeid] --file [filename]  : flash firmware image"  1>&2;
      echo "    " 1>&2;
-     echo "    --list      t                             : list connected devices"  1>&2; 
-     echo "    " 1>&2; 
+     echo "    --list      t                             : list connected devices"  1>&2;
+     echo "    " 1>&2;
      echo "    --settings                                : show settings" 1>&2;
      echo "    --rtt <options>                           : RTT log commands " 1>&2;
-     echo "       start --device [deviceid]              : start logging session"  1>&2; 
-     echo "       kill  --device [session id]            : kill session"  1>&2;  
-     echo "       list                                   : list sessions"  1>&2;      
+     echo "       start --device [deviceid]              : start logging session"  1>&2;
+     echo "       kill  --device [session id]            : kill session"  1>&2;
+     echo "       list                                   : list sessions"  1>&2;
 
 }
 
@@ -130,7 +130,7 @@ function flash_device
         jlink_flash_menu "$1" "$2"
     else
         #ui_errorbox "missing parameters"
-        usage  
+        usage
     fi
 }
 
@@ -148,15 +148,15 @@ function erase_device
 
 function parse_args
 {
-   
+
     if [[ $# -eq "0" ]]
     then
         exit 0
     fi
 
     _parse_long "$@"
- 
-  
+
+
     if [[ ${h} == "help" ]]
     then
        usage
@@ -171,7 +171,7 @@ function parse_args
         erase_device $d
     elif [[ ${c} == "list" ]]
     then
-        device_list_devices  
+        device_list_devices
     elif [[ ${s} == "settings" ]]
     then
         show_settings
@@ -188,7 +188,7 @@ function parse_args
     else
         echo "Invalid command"
         usage
-    fi  
+    fi
 
     exit 0
 

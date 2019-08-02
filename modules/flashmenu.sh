@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Wirepas Oy
+# Copyright 2019 Wirepas Ltd licensed under Apache License, Version 2.0
 
 function check_file
 {
-    file="$1" 
+    file="$1"
 
     if [[ -f $file ]]
     then
@@ -22,14 +22,14 @@ function jlink_flash_menu
     tmp_jlink_file="${HOME}/.wmflash.jlink"
 
     if [[ -z "$2" ]]
-    then 
+    then
         fw_dir=${WM_UTS_SDK_IMAGES_PATH}
 
         old_dir=$PWD
 
         cd $fw_dir
 
-        #TODO: fix trailing / 
+        #TODO: fix trailing /
         images=$(find . -name '*.hex' | cut -c2- | grep final)
 
         cd ${old_dir}
@@ -86,7 +86,7 @@ function jlink_flash_menu
         fi
 
         devices=$(device_get_ids "(FLASH)")
-        
+
         if [[ ${#devices} == 0 ]]
         then
 
@@ -107,12 +107,12 @@ function jlink_flash_menu
     else
         devices=$1
         fw_file=$2
- 
+
         # Set device only if it is not already set via env
         if [[ ${#WM_JLINK_DEVICE} == 0 ]]
         then
             WM_JLINK_DEVICE=${WM_DEFAULT_JLINK_DEVICE}
-        fi        
+        fi
     fi
 
     check_file ${fw_file}
@@ -122,10 +122,10 @@ function jlink_flash_menu
     cmd="gsub(\"DEVICE\", \"$WM_JLINK_DEVICE\"); gsub(\"FIRMWARE\", \"$fw_file\");"
 
     echo "${WM_UTS_FLASH_JLINK} $tmp_jlink_file"
-    
+
     awk "{${cmd}; print}" $WM_UTS_FLASH_JLINK > ${tmp_jlink_file}
 
-    for dev in ${devices} 
+    for dev in ${devices}
     do
         echo "flashing $dev with contents of $tmp_jlink_file"
         JLINK_OPT="-SelectEmuBySN "

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Wirepas Oy
+# Copyright 2019 Wirepas Ltd licensed under Apache License, Version 2.0
 
 function jlink_erase_menu
 {
@@ -8,7 +8,7 @@ function jlink_erase_menu
 
 
     if [[ -z "$1" ]]
-    then 
+    then
         devices=$(device_get_ids "(ERASE)")
     else
         devices=$1
